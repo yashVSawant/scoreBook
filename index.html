@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScoreBook</title>
+</head>
+<link rel="stylesheet" href="scoreBook.css">
+<body>
+    <div id="main" style="display: none;">
+       
+        <div id="mainScore">SCORE :<h2 id="showRuns">0</h2> - <h2 id="showWickets">0</h2></div>
+        <div id="showOvers"></div>
+        <div id="battingTeam">
+            <div id="eachBall">
+            
+                <div id="runnning">
+                    <button id="oneP" class="button">+1</button>
+                    <button id="oneN" class="button">-1</button>
+                </div>
+                <div id="boundary">
+                    <button id="four" class="button">four</button>
+                    <button id="six" class="button">six</button>
+                </div>
+                <div id="extra">
+                    <button id="wide" class="button">wide</button>
+                    <button id="noBall" class="button">no-ball</button>
+                </div>
+            </div>
+        </div>
+            <div id="wickets">
+                <button id="wicket" class="button">wicket</button>
+            </div>     
+        
+        <div id="display">0</div>
+        <div id="enterDiv">
+            <button id="enter" class="button">ENTER</button>
+        </div>
+    </div>
+    
+    <div id="start">
+        <input type="button" id="submit" value="Start Match">
+    </div>
+    <div id="currentOver"></div>
+    <div id="containselect">
+        <lable>over stats</lable>
+        <div id="overs">
+            <select id="overStats"></select>
+        </div>
+    </div>
+</body>
+<script src="scoreBook.js"></script>
+</html>
