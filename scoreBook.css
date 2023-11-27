@@ -1,5 +1,6 @@
 body{
     height: 100%;
+    background-color: rgb(195, 196, 102);
 }
 div #mainScore{
     display: flex;
@@ -62,13 +63,24 @@ div #eachBall{
 #wicket{
     background-color: #fa4109;
 }
-#display{
+#show{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#input{
+    height: 30px;
+    width: 30%;
+    margin: 10px;
+}
+.display{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    border: groove;
-    margin-inline: 30%;
-    margin-top: 30px;
+    justify-content: center; 
+    border:1px solid black;
+    height: 30px;
+    width:30%;
+    margin: 20px;
     font-size: 30px;
 }
 #containselect{
@@ -90,11 +102,17 @@ div #eachBall{
     border-radius: 30px;
 
 }
-#start{
+#match{
+    
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    padding-top: 20px;
+    margin:20%;
     
+}
+.match{
+    height: 50px;
+    width: 100px;
+    background-color: #d5f856;
+    border-radius: 10px;
 }
 

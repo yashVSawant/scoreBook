@@ -1,47 +1,61 @@
 const main = document.getElementById('main');
-const display = document.getElementById('display')
+const display = document.getElementById('display');
+const input = document.getElementById('input');
 const enter = document.getElementById('enter');
-const addOne = document.getElementById('oneP');
-const subOne = document.getElementById('oneN');
-const four = document.getElementById('four');
-const six = document.getElementById('six');
 const no = document.getElementById('noBall');
 const wide = document.getElementById('wide');
+const bies = document.getElementById('bies');
 const wicket = document.getElementById('wicket');
 const startMatch = document.getElementById('submit');
-display.value=0;
-showRuns.value=0;
-showWickets.value=0;
+const showWickets = document.getElementById('showWickets');
+const start = document.getElementById('start');
+const startPage = document.getElementById('startPage');
+const nextInning = document.getElementById('next');
+const end = document.getElementById('end');
+const InputMaxOvers = document.getElementById('maxOvers');
+
+let maxOvers
+
+let inning = 1;
 let fallOfWicket="";
 let ballCount=0;
 let extra="";
 let over=0;
+function refresh(){
+    display.value="";
+    showRuns.value=0;
+    showRuns.innerText=0
+    showWickets.value =0;
+    showWickets.innerText=0
+    over=0;
+    ballCount=0;
+    fallOfWicket="";
+    extra="";
+}
+refresh();
 
-function addDisplay(add){
-    display.value += add;
-    display.innerText = display.value;
+function addDisplay(extra){
+    display.innerText = extra;
 }
-function clearDisplay(){
-    display.innerText = 0;
-}
-function wrapVariables(){
-    let overData="";
+
+function ballInOver(runs){
+   
     const currentOver = document.getElementById('currentOver');
     const showOver = document.getElementById('showOvers');
     const overInfo = document.getElementById('overStats');
-    return function ballOverInfo(){
-        console.log('ok');
+  
         if(!extra)ballCount++;
-        overData +=`${display.value} ${extra}"${fallOfWicket}`;
-        if(!fallOfWicket || display.value){
-            currentOver.innerText += `${display.value} ${extra}${fallOfWicket}"`;
-        }else{
-            currentOver.innerText += `${fallOfWicket}"`;
-            fallOfWicket="";
-        }
+       
+       if(!extra){
+        if(!runs && !fallOfWicket)runs= 0;
+            currentOver.innerText += `[${runs}${fallOfWicket}]`;
+       }else{
+            currentOver.innerText += `(${++runs}${extra}${fallOfWicket})`;
+       }
+
+        fallOfWicket="";
         extra="";
-        display.value=0;
-        display.innerText=0;
+        display.innerText="";
         if(ballCount == 6){
             ballCount=0;
             over++;
@@ -49,72 +63,83 @@ function wrapVariables(){
             bowler.innerText= currentOver.innerText ;
             overInfo.append(bowler);
             console.log('one over');
-            overData="";
             currentOver.innerText="";
+
+            console.log(over)
+            console.log(maxOvers)
+            console.log(over == maxOvers)
+            if(over == maxOvers){
+                if(inning == 1){
+                    main.style.display = 'none'
+                    nextInning.style.display = 'inline'
+                    inning++;
+                }else{
+                    main.style.display = 'none'
+                    end.style.display = 'inline'
+                    
+                }
+                refresh()
+                showOver.innerText="";
+               
+            }
         }
         showOver.innerText=`${over}.${ballCount}`
+}
+
+function updateWicket(){
+    console.log(showWickets.value)
+    const W = ++showWickets.value
+    showWickets.innerText = W;
+    if(showWickets.innerText === '10'){
+        if(inning == 1){
+            main.style.display = 'none'
+            nextInning.style.display = 'inline'
+            inning++
+        }else{
+            main.style.display = 'none'
+            end.style.display = 'inline'
+        }
+        refresh()
     }
 }
-const ballInOver = wrapVariables();
 
-startMatch.addEventListener('dblclick',()=>{
-    main.style.display='inline'
-    startMatch.style.display='none';
-})
-function updateStats(){
-    showRuns.value += display.value;
+function updateRuns(runs){
+    if(extra){
+        runs++;
+    }
+    showRuns.value += runs;
     showRuns.innerText = showRuns.value;
+    input.value="";
 }
 
-function enterData(){
-    const showWickets = document.getElementById('showWickets');
-    enter.addEventListener('dblclick',()=>{
-       
-       
-        if(extra){
-            updateStats();
-            ballInOver();
-            extra="";
-            return;
-        }
-        if(fallOfWicket){
-            showWickets.value += 1;
-            showWickets.innerText = showWickets.value;
-            battingTeam.style.display='inline'
-            ballInOver();
-        }
-        else{
-            updateStats();
-            ballInOver();
-        }
-        
-        
-    })
-}
-enterData();
+enter.addEventListener('click',()=>{
+    const runs =input.value;
+    updateRuns(+runs);
+    if(fallOfWicket){
+        updateWicket();
+    }
+    ballInOver(runs);
 
-addOne.addEventListener('click',()=>{
-    addDisplay(1);
-})
-subOne.addEventListener('click',()=>{
-    addDisplay(-1);
-})
-four.addEventListener('click',()=>{
-    addDisplay(4);
-})
-six.addEventListener('click',()=>{
-    addDisplay(6);
 })
 wide.addEventListener('click',()=>{
     extra="wd";
-    addDisplay(1);
+    addDisplay(extra);
 })
 no.addEventListener('click',()=>{
     extra="N";
-    addDisplay(1);
+    addDisplay(extra);
 })
 wicket.addEventListener('click',()=>{
     fallOfWicket="*W";
-    display.innerText='wicket'
-    
+    display.innerText='wicket'  
+})
+
+start.addEventListener('click',()=>{
+    maxOvers = InputMaxOvers.value
+    main.style.display ='inline';
+    startPage.style.display = 'none'
+})
+nextInning.addEventListener('click',()=>{
+    main.style.display ='inline';
+    nextInning.style.display = 'none'
 })

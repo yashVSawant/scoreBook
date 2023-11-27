@@ -13,41 +13,43 @@
         <div id="showOvers"></div>
         <div id="battingTeam">
             <div id="eachBall">
-            
-                <div id="runnning">
-                    <button id="oneP" class="button">+1</button>
-                    <button id="oneN" class="button">-1</button>
-                </div>
-                <div id="boundary">
-                    <button id="four" class="button">four</button>
-                    <button id="six" class="button">six</button>
-                </div>
                 <div id="extra">
                     <button id="wide" class="button">wide</button>
                     <button id="noBall" class="button">no-ball</button>
-                </div>
+                    <button id="bies" class="button">Bies</button>
+                    <button id="wicket" class="button">wicket</button>
+                </div>  
             </div>
+        </div>    
+        <div id="show">
+            <div class="display" id="display" ></div>
+            <input type="number" id="input" name="text" placeholder="Enter Runs">
         </div>
-            <div id="wickets">
-                <button id="wicket" class="button">wicket</button>
-            </div>     
-        
-        <div id="display">0</div>
         <div id="enterDiv">
             <button id="enter" class="button">ENTER</button>
         </div>
-    </div>
-    
-    <div id="start">
-        <input type="button" id="submit" value="Start Match">
-    </div>
-    <div id="currentOver"></div>
-    <div id="containselect">
-        <lable>over stats</lable>
-        <div id="overs">
-            <select id="overStats"></select>
+        <div id="currentOver"></div>
+        <div id="containselect">
+            <lable>over stats</lable>
+            <div id="overs">
+                <select id="overStats"></select>
+            </div>
         </div>
     </div>
+    <div id="match" >
+        <div id="startPage" >
+            <button id="start" class="match">Start match </button>
+            <label>Enter overs</label>
+            <input type="number" id="maxOvers">
+            <label>Team 1</label>
+            <input type="text" id="team1">
+            <label>Team 2</label>
+            <input type="text" id="team2">
+        </div>
+        <button id="next" class="match" style="display: none;" >Start Next Inning</button>
+        <button id="end" class="match" style="display: none;" >Match End</button>
+    </div>
+    
 </body>
 <script src="scoreBook.js"></script>
 </html>
